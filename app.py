@@ -3,8 +3,30 @@ app = Flask(__name__)
 
 @app.route("/")
 
+from flask import Flask 
+app = Flask(__name__)
+
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
 
 def hello_world():
+    def obter_noticias_folha():
+        site_Folha = requests.get('https://www1.folha.uol.com.br/ultimas-noticias/')
+        bs = BeautifulSoup(site_Folha.content,'html.parser')
+
+        noticias = bs.find_all('div', 'c-headline__content')
+        ultimas_noticias = []
+        for n in noticias:
+            Link = n.find('a')['href']
+            Manchete = n.find('h2').text
+            Data = n.find('time')['datetime']
+            ultimas_noticias.append({'Manchete': Manchete, 'Link': Link, 'Data': Data})
+
+        ultimas_folha = pd.DataFrame(ultimas_noticias)
+        return ultimas_folha
+
     return """<!DOCTYPE html>
     <html>
     <head>
@@ -26,5 +48,23 @@ def hello_world():
     		<tbody>
     		</tbody>
     	</table>
+    	<script>
+    		function preencherTabela() {
+    			// Chamar a função Python e obter os resultados
+    			var noticias = obter_noticias_folha().values;
+    			// Obter a referência da tabela HTML
+    			var tabela = document.getElementById('tabela_noticias');
+    			// Preencher a tabela com os resultados
+    			for (var i = 0; i < noticias.length; i++) {
+    				var linha = tabela.insertRow();
+    				var colunaManchete = linha.insertCell();
+    				var colunaLink = linha.insertCell();
+    				var colunaData = linha.insertCell();
+    				colunaManchete.innerHTML = noticias[i]['Manchete'];
+    				colunaLink.innerHTML = '<a href="' + noticias[i]['Link'] + '">' + noticias[i]['Link'] + '</a>';
+    				colunaData.innerHTML = noticias[i]['Data'];
+    			}
+    		}
+    	</script>
     </body>
     </html>"""
