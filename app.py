@@ -1,4 +1,4 @@
-from flask import Flask 
+from flask import Flask
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -25,41 +25,44 @@ def hello_world():
     return """<!DOCTYPE html>
     <html>
     <head>
-    	<title>Exemplo de tabela HTML com resultados de função Python</title>
-    	<script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.9.6/brython.min.js"></script>
-    	<script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.9.6/brython_stdlib.min.js"></script>
-    	<script type="text/python" src="exemplo.py"></script>
+        <title>Exemplo de tabela HTML com resultados de função Python</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.9.6/brython.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.9.6/brython_stdlib.min.js"></script>
+        <script type="text/python" src="exemplo.py"></script>
     </head>
     <body onload="preencherTabela()">
-    	<h1>Últimas notícias</h1>
-    	<table id="tabela_noticias">
-    		<thead>
-    			<tr>
-    				<th>Manchete</th>
-    				<th>Link</th>
-    				<th>Data</th>
-    			</tr>
-    		</thead>
-    		<tbody>
-    		</tbody>
-    	</table>
-    	<script>
-    		function preencherTabela() {
-    			// Chamar a função Python e obter os resultados
-    			var noticias = obter_noticias_folha().values;
-    			// Obter a referência da tabela HTML
-    			var tabela = document.getElementById('tabela_noticias');
-    			// Preencher a tabela com os resultados
-    			for (var i = 0; i < noticias.length; i++) {
-    				var linha = tabela.insertRow();
-    				var colunaManchete = linha.insertCell();
-    				var colunaLink = linha.insertCell();
-    				var colunaData = linha.insertCell();
-    				colunaManchete.innerHTML = noticias[i]['Manchete'];
-    				colunaLink.innerHTML = '<a href="' + noticias[i]['Link'] + '">' + noticias[i]['Link'] + '</a>';
-    				colunaData.innerHTML = noticias[i]['Data'];
-    			}
-    		}
-    	</script>
+        <h1>Últimas notícias</h1>
+        <table id="tabela_noticias">
+            <thead>
+                <tr>
+                    <th>Manchete</th>
+                    <th>Link</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <script>
+            function preencherTabela() {
+                // Chamar a função Python e obter os resultados
+                var noticias = obter_noticias_folha().values;
+                // Obter a referência da tabela HTML
+                var tabela = document.getElementById('tabela_noticias');
+                // Preencher a tabela com os resultados
+                for (var i = 0; i < noticias.length; i++) {
+                    var linha = tabela.insertRow();
+                    var colunaManchete = linha.insertCell();
+                    var colunaLink = linha.insertCell();
+                    var colunaData = linha.insertCell();
+                    colunaManchete.innerHTML = noticias[i]['Manchete'];
+                    colunaLink.innerHTML = '<a href="' + noticias[i]['Link'] + '">' + noticias[i]['Link'] + '</a>';
+                    colunaData.innerHTML = noticias[i]['Data'];
+                }
+            }
+        </script>
     </body>
     </html>"""
+
+if __name__ == '__main__':
+    app.run()
