@@ -43,23 +43,5 @@ def hello_world():
     		<tbody>
     		</tbody>
     	</table>
-    	<script>
-    		function preencherTabela() {
-    			// Chamar a função Python e obter os resultados
-    			var noticias = obter_noticias_folha().values;
-    			// Obter a referência da tabela HTML
-    			var tabela = document.getElementById('tabela_noticias');
-    			// Preencher a tabela com os resultados
-    			for (var i = 0; i < noticias.length; i++) {
-    				var linha = tabela.insertRow();
-    				var colunaManchete = linha.insertCell();
-    				var colunaLink = linha.insertCell();
-    				var colunaData = linha.insertCell();
-    				colunaManchete.innerHTML = noticias[i]['Manchete'];
-    				colunaLink.innerHTML = '<a href="' + noticias[i]['Link'] + '">' + noticias[i]['Link'] + '</a>';
-    				colunaData.innerHTML = noticias[i]['Data'];
-    			}
-    		}
-    	</script>
     </body>
     </html>"""
