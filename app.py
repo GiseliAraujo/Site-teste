@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 
 def hello_world():
-    return "<!DOCTYPE html>
+    return """<!DOCTYPE html>
     <html>
     <head>
     	<title>Exemplo de tabela HTML com resultados de função Python</title>
@@ -27,4 +27,4 @@ def hello_world():
     		</tbody>
     	</table>
     </body>
-    </html>"
+    </html>"""
