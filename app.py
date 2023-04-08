@@ -1,16 +1,11 @@
 from flask import Flask 
-app = Flask(__name__)
-
-@app.route("/")
-
-from flask import Flask 
-app = Flask(__name__)
-
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 
+app = Flask(__name__)
 
+@app.route("/")
 def hello_world():
     def obter_noticias_folha():
         site_Folha = requests.get('https://www1.folha.uol.com.br/ultimas-noticias/')
