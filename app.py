@@ -6,8 +6,7 @@ import pandas as pd
 app = Flask(__name__)
 
 @app.route("/")
-def hello_world():
-    def obter_noticias_folha():
+def obter_noticias_folha():
         site_Folha = requests.get('https://www1.folha.uol.com.br/ultimas-noticias/')
         bs = BeautifulSoup(site_Folha.content,'html.parser')
 
@@ -21,7 +20,11 @@ def hello_world():
 
         ultimas_folha = pd.DataFrame(ultimas_noticias)
         return ultimas_folha
-
+    
+obter_noticias_folha()   
+    
+    
+def hello_world():
     return """<!DOCTYPE html>
     <html>
     <head>
