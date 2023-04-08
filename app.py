@@ -1,28 +1,11 @@
 from flask import Flask 
 app = Flask(__name__)
 
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
+@app.route("/")
 
 
 def hello_world():
-    def obter_noticias_folha():
-        site_Folha = requests.get('https://www1.folha.uol.com.br/ultimas-noticias/')
-        bs = BeautifulSoup(site_Folha.content,'html.parser')
-
-        noticias = bs.find_all('div', 'c-headline__content')
-        ultimas_noticias = []
-        for n in noticias:
-            Link = n.find('a')['href']
-            Manchete = n.find('h2').text
-            Data = n.find('time')['datetime']
-            ultimas_noticias.append({'Manchete': Manchete, 'Link': Link, 'Data': Data})
-
-        ultimas_folha = pd.DataFrame(ultimas_noticias)
-        return ultimas_folha
-
-    return """<!DOCTYPE html>
+    return "<!DOCTYPE html>
     <html>
     <head>
     	<title>Exemplo de tabela HTML com resultados de função Python</title>
@@ -44,4 +27,4 @@ def hello_world():
     		</tbody>
     	</table>
     </body>
-    </html>"""
+    </html>"
