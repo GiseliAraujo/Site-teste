@@ -23,9 +23,8 @@ def obter_noticias_folha():
     return ultimas_folha
 
 
-
 def hello_world():
-  return "<!DOCTYPE html>
+    return """<!DOCTYPE html>
 <html>
 <head>
 	<title>Exemplo de tabela HTML com resultados de função Python</title>
@@ -49,7 +48,7 @@ def hello_world():
 	<script>
 		function preencherTabela() {
 			// Chamar a função Python e obter os resultados
-			var noticias = obter_noticias_folha();
+			var noticias = obter_noticias_folha().values;
 
 			// Obter a referência da tabela HTML
 			var tabela = document.getElementById('tabela_noticias');
@@ -61,11 +60,12 @@ def hello_world():
 				var colunaLink = linha.insertCell();
 				var colunaData = linha.insertCell();
 
-				colunaManchete.innerHTML = noticias[i].Manchete;
-				colunaLink.innerHTML = '<a href="' + noticias[i].Link + '">' + noticias[i].Link + '</a>';
-				colunaData.innerHTML = noticias[i].Data;
+				colunaManchete.innerHTML = noticias[i]['Manchete'];
+				colunaLink.innerHTML = '<a href="' + noticias[i]['Link'] + '">' + noticias[i]['Link'] + '</a>';
+				colunaData.innerHTML = noticias[i]['Data'];
 			}
 		}
 	</script>
 </body>
-</html>"
+</html>"""
+
