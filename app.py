@@ -80,22 +80,6 @@ def Scraping_thetimes():
     ultimas_thetimes = pd.DataFrame(ultimas_noticias)
     return ultimas_thetimes
 
-def Scraping_folha():
-    site_Folha = requests.get('https://www1.folha.uol.com.br/ultimas-noticias/')
-    bs = BeautifulSoup(site_Folha.content,'html.parser')
-
-    noticias = bs.find_all('div', 'c-headline__content')
-    ultimas_noticias = []
-    for n in noticias:
-        info = 'Folha de S.Paulo (Brasil, São Paulo, São Paulo) - Português'
-        Link = n.find('a')['href']
-        Manchete = n.find('h2').text
-        Data = n.find('time')['datetime']
-        ultimas_noticias.append({'Manchete': Manchete, 'Link': Link, 'Data': Data, 'Informações':info})
-
-
-    ultimas_folha = pd.DataFrame(ultimas_noticias)
-    return ultimas_folha
 
 def Scraping_folha(limit=20):
     site_Folha = requests.get('https://www1.folha.uol.com.br/ultimas-noticias/')
@@ -114,7 +98,7 @@ def Scraping_folha(limit=20):
     ultimas_folha = pd.DataFrame(ultimas_noticias[-limit:])
     return ultimas_folha
 
-def Scraping_ElPais():
+def Scraping_ElPais(limit=20):
     site_elpais = requests.get('https://brasil.elpais.com/lomasvisto/index.html')
     bs = BeautifulSoup(site_elpais.content,'html.parser')
 
@@ -131,7 +115,7 @@ def Scraping_ElPais():
     ultimas_elpais = pd.DataFrame(ultimas_noticias)
     return ultimas_elpais
 
-def Scraping_BBC():
+def Scraping_BBC(limit=20):
     link_bbc = 'https://www.bbc.com/portuguese/popular/read'
     requisicao = requests.get(link_bbc)
     html_bbc = BeautifulSoup(requisicao.content, 'html.parser')
@@ -203,7 +187,7 @@ def enviar_email():
         msg['Subject'] = "Assunto"
         msg['From'] = 'giselialmeidadearaujo@gmail.com'
         msg['To'] = 'giselialmeidadearaujo@gmail.com'
-        password = SENHA_EMAIL
+        password = KEY_GMAIL
         msg.add_header('Content-Type', 'text/html')
         msg.set_payload(corpo_email)
 
